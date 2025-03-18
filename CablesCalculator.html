@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cables Finance RWA Impact Calculator</title>
+    <style>
+        /* Custom CSS for Cables' Branding */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f9fc; /* Light background for contrast */
+            color: #ffffff; /* White text for readability */
+        }
+        .calculator {
+            background: #030c24; /* Your brand color for the box */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #1a2238; /* Lighter shade of #030c24 */
+            color: #ffffff; /* White text for inputs */
+        }
+        button {
+            background: #1a2238; /* Lighter shade of #030c24 */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1a2238; /* Lighter shade of #030c24 */
+            border-radius: 6px;
+            color: #ffffff; /* White text for results */
+        }
+        .highlight {
+            color: #4a90e2; /* Accent color for highlights */
+            font-weight: bold;
+        }
+        .social-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .social-links a {
+            color: #4a90e2; /* Accent color for links */
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 150px; /* Adjust logo size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <!-- Add Cables Logo Here -->
+        <div class="logo">
+            <img src="logo.png" alt="Cables Finance Logo"> <!-- Replace with your logo file name -->
+        </div>
+
+        <h2>💰 Cables Finance RWA Impact Calculator</h2>
+        <p>See how much you could earn with real-world assets:</p>
+        
+        <!-- Input Section -->
+        <label>Your Savings Amount ($)</label>
+        <input type="number" id="savings" placeholder="e.g., 10000">
+        
+        <label>Select Currency</label>
+        <select id="currency">
+            <option value="EUR">🇪🇺 Euro (cEUR)</option>
+            <option value="JPY">🇯🇵 Yen (cJPY)</option>
+            <option value="XAU">🟡 Gold (cXAU)</option>
+        </select>
+        
+        <button onclick="calculate()">Calculate My Impact</button>
+        
+        <!-- Result Section -->
+        <div class="result" id="result">
+            <p>With <span class="highlight" id="inputAmount">$10,000</span> in <span id="inputCurrency">cEUR</span>:</p>
+            <p>📈 Annual Yield: <span class="highlight" id="yield">$1,500</span> (15%)</p>
+            <p>🏦 Traditional Savings: <span class="highlight" id="traditional">$50</span> (0.5%)</p>
+            <p>🔒 FX Savings: <span class="highlight" id="fx">$300</span> (3%)</p>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <p>Learn more about Cables Finance:</p>
+            <a href="https://cables.finance" target="_blank">🌐 Visit Our Website</a>
+            <a href="https://twitter.com/CablesFinance" target="_blank">🐦 Follow Us on Twitter</a>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Get user inputs
+            const savings = parseFloat(document.getElementById('savings').value) || 10000;
+            const currency = document.getElementById('currency').value;
+            
+            // Calculations
+            const cablesYield = savings * 0.15; // 15% APR
+            const traditionalYield = savings * 0.005; // 0.5% bank rate
+            const fxSavings = savings * 0.03; // 3% FX fees
+
+            // Update results
+            document.getElementById('inputAmount').textContent = `$${savings.toLocaleString()}`;
+            document.getElementById('inputCurrency').textContent = currency;
+            document.getElementById('yield').textContent = `$${cablesYield.toLocaleString()}`;
+            document.getElementById('traditional').textContent = `$${traditionalYield.toLocaleString()}`;
+            document.getElementById('fx').textContent = `$${fxSavings.toLocaleString()}`;
+        }
+
+        // Initialize with default values
+        calculate();
+    </script>
+</body>
+</html>
